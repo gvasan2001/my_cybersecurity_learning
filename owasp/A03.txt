@@ -1,0 +1,17 @@
+Title & Summary
+A03: Software Supply Chain — xz/liblzma, CVE-2024-3094
+
+Classification
+This is categorized under OWASP Top 10 as A03, a software supply chain issue. This is not a problem in our own coding — it originates from a third-party or external package we use. Andres Freund, a Microsoft developer, found that the popular xz/liblzma component had a vulnerability: logging in with a wrong username and password took slightly longer than expected (extra CPU time). This led him to discover the real issue, which took a bit longer to trace.
+
+Affected Components
+xz/liblzma versions 5.6.0 and 5.6.1
+
+Entry Point
+SSH login (sshd, which links against liblzma)
+
+Technical Details
+The vulnerability was used to create a backdoor.
+
+References
+https://www.bugcrowd.com/blog/supply-chain-backdoors-xz-liblzma-cve-2024-3094-and-what-we-currently-know/
