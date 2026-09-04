@@ -27,11 +27,29 @@ The password for Level 1 is exposed directly within the webpage's client-side so
 ### Key Learning
 Sensitive information, credentials, or keys should **never** be exposed in client-side HTML/JavaScript source code, as anyone can view it.
 
+###  Level 1-Credentials
+* **Username:** `natas1`
+* **Password:** `scfWG6qNEIdzqVyfRwEGXyNUfFZkZeQ7`
 ---
 
 ## Level 1 → Level 2
 
-### Credentials
-* **Username:** `natas1`
-* **Password:** `scfWG6qNEIdzqVyfRwEGXyNUfFZkZeQ7`
+### Description
+The password for Level 2 is exposed directly within the webpage's client-side source code. However, right-clicking is disabled on this website..
+
+### Steps to Solve
+1. Open the **Natas Level 1** webpage.
+2. Since right-clicking is restricted, press the F12 key on your keyboard (or the specific shortcut depending on your laptop) to open the Developer Tools.
+3. Examine the HTML source code.
+4. Locate the commented-out or exposed password.
+5. Use the discovered password to log in as `natas2`.
+
+### Key Learning
+Sensitive information, credentials, or encryption keys should **never** be exposed in client-side HTML or JavaScript source code. Even if a website restricts right-clicking, attackers have multiple other ways to access and view the source code.
+
+ 
+
+### Level 2-Credentials
+* **Username:** `natas2`
+* **Password:** `vsDOxoXyq3wckCP1ZmTZ71ngIA606odB`
 
