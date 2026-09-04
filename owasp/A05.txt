@@ -1,0 +1,25 @@
+AI Mode conversation: hihiHello! How can I help you today?Please let me know if you are looking for:Information on a specific topicHelp with writing or editing textAnswering questions or solving problemsBrainstorming creative ideasWhat would you like to focus on first?A05:2025 injuction
+         this injuction valuratebuly core concubut is not validat or saniticy the user input  so that use the user input to hacker or attaker insert the maliciec code to take cover the other account , server even database also 
+          in ai module also have this typt of valurabult like promt injucton in LLM01:2025 promot insection is first most high impage valuratible 
+           
+           sql inquction 
+           nosql injection
+           xxs (croces site scripting)
+           prompt injuciton 
+           
+           
+           like this have lot of type 
+           
+           
+           for example 
+               if you do not sanitiy the login page input 
+                 user enter like ' or true 
+                 
+                 this line bypass the login five the first user account access to attacker 
+
+
+
+
+check the grammer and spelling and rewreite in currect grammer sendences 
+
+do not chage concept flowHere is the corrected version of your text, with grammar and spelling fixed while keeping your exact conceptual flow intact:A05:2025 – InjectionThis injection vulnerability occurs when user input is not properly validated or sanitized. Because of this, attackers can insert malicious code to take over other user accounts, servers, or even the database itself.AI modules also suffer from this type of vulnerability, known as Prompt Injection. In fact, LLM01:2025 Prompt Injection is ranked as the most severe and high-impact vulnerability for large language models.There are many different types of injection attacks, including:SQL InjectionNoSQL InjectionXSS (Cross-Site Scripting)Prompt InjectionFor example, if you do not sanitize the input on a login page and a user enters something like ' or true --, this line can bypass the login entirely and grant the attacker access to the first user account in the database.
