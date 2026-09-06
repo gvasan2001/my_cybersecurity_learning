@@ -12,7 +12,7 @@ Each level focuses on a specific vulnerability or security weakness. The objecti
 
 ---
 
-## Level 0 → Level 1
+## Natas Level 0 → Level 1
 
 ### Description
 The password for Level 1 is exposed directly within the webpage's client-side source code.
@@ -32,7 +32,7 @@ Sensitive information, credentials, or keys should **never** be exposed in clien
 * **Password:** `scfWG6qNEIdzqVyfRwEGXyNUfFZkZeQ7`
 ---
 
-## Level 1 → Level 2
+## Natas Level 1 → Level 2
 
 ### Description
 The password for Level 2 is exposed directly within the webpage's client-side source code. However, right-clicking is disabled on this website..
@@ -52,4 +52,30 @@ Sensitive information, credentials, or encryption keys should **never** be expos
 ### Level 2-Credentials
 * **Username:** `natas2`
 * **Password:** `vsDOxoXyq3wckCP1ZmTZ71ngIA606odB`
+
+
+## Natas Level 2 → Level 3
+
+### Description
+The password for level 3 is exposed in the `/files/users.txt` file. Directory 
+indexing is enabled on the server, so we can browse the directory listing and 
+see all the files — one of which, `users.txt`, exposes sensitive data like 
+the password.
+
+### Steps to Solve
+1. Open the **Natas Level 2** webpage.
+2. Right-click on the page and select **Inspect** or **View Page Source**.
+3. Examine the HTML source code — there's an image tag `<img src="files/pixel.png">` 
+   that reveals the directory name.
+4. The `files` folder does not have an index file, so the server lists all 
+   files in it — one of which is `users.txt`.
+5. The `users.txt` file reveals the password to log in as `natas3`.
+
+### Key Learning and Mitigation
+Do not allow directory listing to be enabled on the server, and do not store 
+sensitive data in plaintext files — keep it in a secure location instead.
+
+### Level 3 Credentials
+- **Username:** `natas3`
+- **Password:** `K30JrSRHzjxq3paUQuwozY4MNvmNFyhI`
 
