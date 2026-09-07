@@ -79,3 +79,22 @@ sensitive data in plaintext files — keep it in a secure location instead.
 - **Username:** `natas3`
 - **Password:** `K30JrSRHzjxq3paUQuwozY4MNvmNFyhI`
 
+
+
+## Natas Level 3 → Level 4
+
+### Description
+This lab's password is exposed via `robots.txt`, which contains a `Disallow` entry for the path `/s3cr3t/`. Look for that path — we find `users.txt`, which has the next level's password.
+
+### Steps to Solve
+1. Open the **Natas Level 3** webpage and check `/robots.txt` in the URL.
+2. You discover the new page listing `Disallow: /s3cr3t/`.
+3. Check this path — you discover a new page listing `users.txt`.
+4. The `users.txt` file reveals the password to log in as `natas4`.
+
+### Key Learning and Mitigation
+Do not disclose sensitive paths in `robots.txt`. This misconfiguration can lead to the discovery of admin pages or restricted pages containing sensitive information.
+
+### Level 4 Credentials
+- **Username:** `natas4`
+- **Password:** `JDrPnuZAKyl6MkiqQGFIddrqpvgOASth`
