@@ -98,3 +98,26 @@ Do not disclose sensitive paths in `robots.txt`. This misconfiguration can lead 
 ### Level 4 Credentials
 - **Username:** `natas4`
 - **Password:** `JDrPnuZAKyl6MkiqQGFIddrqpvgOASth`
+
+
+
+## Natas Level 4 → Level 5
+
+### Description
+This lab's password is exposed when we change the Referer header.
+
+### Steps to Solve
+1. Open the **Natas Level 4**  webpage and intercept the traffic in Burp Suite.
+2. Capture the GET request — it has a Referer header. Change its value from natas4 to natas5.
+3. Forward the manipulated request. The server now thinks you came from natas5's page and grants access.
+4. The password is now shown on the web screen.
+
+### Key Learning and Mitigation
+This lab teaches us not to blindly trust client-side input. Any header or input coming from the client to the server can be tampered with — that's the root cause of most attacks a server faces. Never use client-supplied data (like the Referer header) as a security or authorization control.
+
+### Level 5 Credentials
+- **Username:** `natas5`
+- **Password:** `e4z2Noy3oqwPJUWzJH0dseN67Cn1sy2M`
+
+
+
