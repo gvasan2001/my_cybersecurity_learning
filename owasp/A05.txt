@@ -1,25 +1,67 @@
-AI Mode conversation: hihiHello! How can I help you today?Please let me know if you are looking for:Information on a specific topicHelp with writing or editing textAnswering questions or solving problemsBrainstorming creative ideasWhat would you like to focus on first?A05:2025 injuction
-         this injuction valuratebuly core concubut is not validat or saniticy the user input  so that use the user input to hacker or attaker insert the maliciec code to take cover the other account , server even database also 
-          in ai module also have this typt of valurabult like promt injucton in LLM01:2025 promot insection is first most high impage valuratible 
-           
-           sql inquction 
-           nosql injection
-           xxs (croces site scripting)
-           prompt injuciton 
-           
-           
-           like this have lot of type 
-           
-           
-           for example 
-               if you do not sanitiy the login page input 
-                 user enter like ' or true 
-                 
-                 this line bypass the login five the first user account access to attacker 
+A05:2025 – SQL Injection
 
+This injection vulnerability is a core concept: not validating or sanitizing user input allows an attacker to insert malicious code, take over other accounts, or even compromise servers and databases.
 
+In AI modules, there is also this type of vulnerability, like prompt injection in LLMs. According to OWASP's 2025 list, prompt injection (LLM01:2025) is the highest-impact vulnerability.
 
+There are many types of such vulnerabilities, including:
 
-check the grammer and spelling and rewreite in currect grammer sendences 
+SQL injection
+NoSQL injection
+XSS (Cross-Site Scripting)
+Prompt injection
 
-do not chage concept flowHere is the corrected version of your text, with grammar and spelling fixed while keeping your exact conceptual flow intact:A05:2025 – InjectionThis injection vulnerability occurs when user input is not properly validated or sanitized. Because of this, attackers can insert malicious code to take over other user accounts, servers, or even the database itself.AI modules also suffer from this type of vulnerability, known as Prompt Injection. In fact, LLM01:2025 Prompt Injection is ranked as the most severe and high-impact vulnerability for large language models.There are many different types of injection attacks, including:SQL InjectionNoSQL InjectionXSS (Cross-Site Scripting)Prompt InjectionFor example, if you do not sanitize the input on a login page and a user enters something like ' or true --, this line can bypass the login entirely and grant the attacker access to the first user account in the database.
+SQL Injection
+
+Not properly sanitizing user input can lead to SQL injection. For example, if you do not sanitize the login page input, a user can enter something like ' OR true --, and this bypasses the login, giving the attacker access to the first user's account.
+
+There are many injection points, such as parameters, the login page, the search bar, cookie input, and payloads — many places serve as attack surfaces for SQL injection. There are also different types of SQL injection.
+
+Impact of this vulnerability:
+
+Login credentials
+Credit card details, personal information
+Account takeover
+And many more
+
+Types of SQL injection:
+
+Boolean-based
+Union-based
+Blind SQL
+XML encoding
+
+Boolean-based SQL injection
+
+This is checked at every endpoint. Starting with ' returns an error. Then:
+
+' AND '1'='1 — this always returns true
+' AND '2'='2 — this always returns false
+
+If the results confirm this behavior, the endpoint is vulnerable to SQL injection.
+
+Next, we need to find how many columns are in the table. There are two ways to do this:
+
+' ORDER BY 1 --
+
+This increases the number until you get a 500 error — the last number before the error tells you how many columns there are.
+
+To gather more information, we use a UNION-based attack:
+
+' UNION SELECT NULL,NULL,NULL --
+
+This also helps find the database version. If the number of NULLs matches the number of columns, it returns 200; otherwise it returns a 500 error — this is how we determine the number of columns.
+
+Using this information, we can find all the table names in the database, along with column names and values.
+
+Blind SQL injection
+
+In blind SQL injection, the entry point for SQL is known, but it doesn't directly return information (e.g., in cookies). Instead, we notice changes in the response and use that to infer information. For example, some websites show a "welcome back" message depending on a tracking ID — we use that to find data.
+
+First, check with ' AND '1'='1, then ' AND '1'='2. This produces a change: when ' AND '1'='1 is true, it returns the "welcome back" message; when ' AND '1'='2 is true, it returns nothing. Using this, we can determine whether a table exists, find column names, and figure out password-related information.
+
+Within blind SQL injection, there is also a type called conditional errors. This is similar to the previous method, but instead of a data change, it relies on an error message appearing when the condition is wrong — we use that to build conditional logic and extract information.
+
+XML encoding
+
+This payload targets SQL vulnerabilities in input fields, such as user input that is accepted in the login flow. We use this to convert characters into HTML entities, which we then use to extract sensitive information.
