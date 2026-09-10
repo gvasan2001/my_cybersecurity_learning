@@ -121,3 +121,25 @@ This lab teaches us not to blindly trust client-side input. Any header or input 
 
 
 
+## Natas Level 5 → Level 6
+
+### Description
+This lab's password is exposed when we change the cookie.
+
+### Steps to Solve
+1. Open the **Natas Level 5**  webpage and intercept the traffic in Burp Suite.
+2. Capture the GET request — it has a cokkie header. Change its value from 0 to 1.
+3. Forward the manipulated request. The server now thinks you came from natas6's page and grants access.
+4. The password is now shown on the web screen.
+
+### Key Learning and Mitigation
+This lab teaches us not to blindly trust client-side input. Any header or input coming from the client to the server can be tampered with — that's the root cause of most attacks a server faces. Never use client-supplied data (like the Referer header) as a security or authorization control.
+
+### Level 6 Credentials
+- **Username:** `natas6`
+- **Password:** `7mhjtShJAcld2NYbKHEadnhEwRn2P8VT`
+
+
+
+
+
