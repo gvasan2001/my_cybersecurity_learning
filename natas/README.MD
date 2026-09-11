@@ -139,6 +139,32 @@ This lab teaches us not to blindly trust client-side input. Any header or input 
 - **Username:** `natas6`
 - **Password:** `7mhjtShJAcld2NYbKHEadnhEwRn2P8VT`
 
+## Natas Level 6 → Level 7
+
+### Description
+This level's password is obtained by entering the correct secret key.
+
+### Steps to Solve
+1. Open the **Natas Level 6**  webpage have the view sourcecode.
+2. click the button show the what condition need to get the next level password .
+3. match the secure value some var get the one of the /includes/secret.inc.
+4. view that page you have the securet value enter it get the password of next level.
+1. Open the  **Natas Level 6**x webpage and view its source code.
+2. Look at the source to see the condition required to get the next level's password.
+3. The code includes a file, **includes/secret.inc**, which holds the value your input is checked against.
+4. Navigate directly to that file's URL **(e.g. http://natas6.natas.labs.overthewire.org/includes/secret.inc)**. Since .inc is not registered as a PHP-executable extension by the server, its contents are served as plain text instead of being processed — so the secret value is exposed in the page source.
+5. copy that value and submit it in the form to get the password for the next level.
+
+### Key Learning and Mitigation
+Don't use non-standard extensions (like .inc) for PHP include files. If a file contains PHP code but isn't named with a .php extension, the web server may serve it as raw text instead of executing it — leaking source code and secrets to anyone who requests it directly.
+Never hardcode secrets in include files within the webroot. Store sensitive values (API keys, credentials, tokens) in environment variables (e.g. via a .env file) or a secrets manager, and ensure they're outside the publicly served directory.
+More generally: any file reachable via a direct URL should be assumed to be readable by an attacker — sensitive logic and data should never depend on obscurity of file location alone.
+
+### Level 6 Credentials
+- **Username:** `natas7`
+- **Password:** `B1szg95UcTnrzwnF3i3TzYHlyYh8iBV0`
+
+
 
 
 
