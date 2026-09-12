@@ -160,9 +160,32 @@ Don't use non-standard extensions (like .inc) for PHP include files. If a file c
 Never hardcode secrets in include files within the webroot. Store sensitive values (API keys, credentials, tokens) in environment variables (e.g. via a .env file) or a secrets manager, and ensure they're outside the publicly served directory.
 More generally: any file reachable via a direct URL should be assumed to be readable by an attacker — sensitive logic and data should never depend on obscurity of file location alone.
 
-### Level 6 Credentials
+### Level 7 Credentials
 - **Username:** `natas7`
 - **Password:** `B1szg95UcTnrzwnF3i3TzYHlyYh8iBV0`
+
+
+
+
+
+## Natas Level 7 → Level 8
+
+### Description
+This level's user input in the URL is not properly validated. Use that flaw to exploit it (Local File Inclusion / path traversal).
+
+### Steps to Solve
+1. Open the Natas Level 7 webpage — it has Home and About buttons.
+2. Clicking either button takes you to **/index.php?page=home**.
+3. Change the page parameter's value to something invalid; you'll see an error message. Inspect the page source, and the hidden/base file path will be exposed.
+4. Use that path to craft the **URL: /index.php?page=/etc/natas_webpass/natas8**.
+5. The password for the next level will be displayed.
+
+### Key Learning and Mitigation
+Do not trust user input blindly. Also, avoid returning detailed error messages to the front end, as they can leak sensitive server-side information (like file paths) that attackers can use for exploitation.
+
+### Level 8 Credentials
+- **Username:** `natas8`
+- **Password:** `ugXL95KQmUAJJj6bMezOlBNDyI9Imwkc`
 
 
 
