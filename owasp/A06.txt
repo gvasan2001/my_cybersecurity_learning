@@ -1,0 +1,2 @@
+A06:2025 Insecure Design
+ this main defination is outdate software or busness logic error 
