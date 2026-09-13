@@ -188,6 +188,50 @@ Do not trust user input blindly. Also, avoid returning detailed error messages t
 - **Password:** `ugXL95KQmUAJJj6bMezOlBNDyI9Imwkc`
 
 
+# Natas Level 8 → Level 9
+
+## Description
+In this level, the input validation is handled on the back end using a simple reversible encoding scheme. View the page source to find the login logic and reverse it to recover the password.
+
+## Steps to Solve
+
+1. Open the Natas Level 8 webpage — it has a "secret" input field and a link to view the source code.
+2. Click **View sourcecode** and examine the function that handles the validation.
+3. The relevant code is:
+
+   ```php
+   function encodeSecret($secret) {
+       return bin2hex(strrev(base64_encode($secret)));
+   }
+   ...
+   if (array_key_exists("secret", $_POST) && encodeSecret($_POST['secret']) == $encodedSecret) {
+   ```
+
+   So the secret is encoded as: `base64_encode($secret)` → `strrev()` → `bin2hex()`.
+
+4. The page also shows the pre-computed encoded value:
+
+   ```
+   $encodedSecret = "3d3d516343746d4d6d6c315669563362";
+   ```
+
+5. To recover the original secret, reverse each step in the opposite order:
+   - **hex2bin** the string (convert hex back to raw bytes)
+   - **strrev** the result (reverse the string back)
+   - **base64_decode** the result (decode back to plain text)
+
+6. Enter the resulting plaintext value into the "secret" input field and submit — this is the password for the next level.
+
+## Key Learning and Mitigation
+
+Never rely on client-side or "security through obscurity" validation logic that can be reverse-engineered from exposed source code. Sensitive values (secrets, keys, credentials) should never be hardcoded directly in application code — store them in environment variables (`.env`) or a secrets manager, and keep validation logic server-side and cryptographically sound (not just reversible encoding).
+
+## Level 9 Credentials
+
+- **Username:** `natas9`
+- **Password:** `UdxmI27dTaXmnd1rxKQTfws6jihTdcQ9`
+
+
 
 
 
