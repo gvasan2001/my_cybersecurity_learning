@@ -1,0 +1,5 @@
+A07:2025  Authentication Failures
+   this bug fource on the lgoin failed this all cover like sql injuaction or accoutn takeover like all 
+   
+    yes i also have doudle why  already this bug catagre in some other place this separeate catageris  we will find in later discussen
+   
