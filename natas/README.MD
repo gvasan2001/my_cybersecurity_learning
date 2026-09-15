@@ -231,8 +231,26 @@ Never rely on client-side or "security through obscurity" validation logic that 
 - **Username:** `natas9`
 - **Password:** `UdxmI27dTaXmnd1rxKQTfws6jihTdcQ9`
 
+# Natas Level 9 → Level 10
 
+## Description
+This level contains a command injection vulnerability.
 
+## Steps to Solve
+
+1. Open the web page, which has a search bar/input field.
+2. View the page source and inspect the backend code. Notice that the input is passed directly into a command execution function.
+3. Observe that the user input is not sanitized properly before being used in the command.
+4. Inject a command using shell metacharacters — for example, appending `; ls` — so the input is executed like a command line.
+5. Since all passwords are stored under `/etc/natas_webpass/`, inject a command to read the password file for the next level, e.g. `; cat /etc/natas_webpass/natas10`.
+
+## Key Learning and Mitigation
+Always sanitize and validate user input before passing it to any system/shell command. Use allow-lists, proper escaping, or safer APIs (avoid passing raw user input to shell execution functions) to prevent command injection.
+
+## Level 10 Credentials
+
+- **Username:** `natas10`
+- **Password:** `EgjlkzB6E8LJyf2Obt4q7q4ewt5ZWSNv`
 
 
 
