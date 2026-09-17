@@ -1,0 +1,10 @@
+A01:2025 - Broken Access Control
+
+Broken Access Control occurs when an application fails to properly enforce restrictions on what authenticated users are allowed to do. Attackers can exploit these flaws to access unauthorized functionality or data. 
+
+There are two primary types of Broken Access Control: 
+
+1. Vertical Broken Access Control (Privilege Escalation)
+This occurs when a user with lower privileges accesses functions or data reserved for a user with higher privileges. For example, during a grey-box penetration test, an attacker uses standard user credentials to bypass security controls and gain access to an administrative panel or a lower-privileged role's restricted data.
+2. Horizontal Broken Access Control
+This occurs when a user accesses functions or data belonging to another user who shares the same privilege level. For example, a standard user manipulates a request to view another standard user's account details, credit card information, or private data.
