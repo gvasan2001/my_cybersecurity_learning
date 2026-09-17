@@ -253,5 +253,36 @@ Always sanitize and validate user input before passing it to any system/shell co
 - **Password:** `EgjlkzB6E8LJyf2Obt4q7q4ewt5ZWSNv`
 
 
+# Natas Level 10 → Level 11
+
+## Description
+This level contains a command injection vulnerability.
+
+## Steps to Solve
+
+1. Open the web page, which has a search input field.
+2. View the page source and inspect the backend PHP code. Notice that user input is passed directly into a command execution function (e.g., concatenated into a shell command run via `passthru`/`exec`, similar to `grep -i "$key" dictionary.txt`).
+3. Observe that the application only blacklists three characters — `;`, `|`, and `&` — in an attempt to block command chaining.
+4. Since the blacklist is incomplete, other shell metacharacters or separators (such as a newline) are not filtered and can still be used to inject an additional command. Craft an input that appends a second command to read the next level's password file, e.g.:
+
+   ```
+   . /etc/natas_webpass/natas11
+   ```
+
+5. Submit the crafted input through the search field to execute the injected command and retrieve the password for `natas11`.
+
+## Key Learning and Mitigation
+
+The developer sanitized only a few known command-separator symbols (`;`, `|`, `&`) but missed other characters/methods (e.g., newlines) that can also be used to chain commands in a shell. **Blacklisting specific symbols is fragile and easy to bypass.**
+
+**Recommended fix:** Avoid passing user input to shell commands entirely. If shell execution is unavoidable, use a strict allow-list (permit only expected characters, e.g., alphanumeric), and prefer safe APIs (e.g., parameterized calls or language-native functions) instead of raw shell string concatenation.
+
+## Level 11 Credentials
+
+- **Username:** `natas11`
+- **Password:** `VUMQDmuITOEHzhviLE5V0VG9cPMQkyxd`
+
+
+
 
 
