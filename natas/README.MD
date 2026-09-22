@@ -283,6 +283,84 @@ The developer sanitized only a few known command-separator symbols (`;`, `|`, `&
 - **Password:** `VUMQDmuITOEHzhviLE5V0VG9cPMQkyxd`
 
 
+# Natas Level 11 → Level 10
+
+## Description
+
+This level uses **XOR encryption** to encrypt the cookie value. The implementation is vulnerable because the XOR key can be recovered from known plaintext and ciphertext.
+
+## Steps to Solve
+
+1. Open the webpage. It contains a **hexadecimal color input field**. First, view the page source code.
+
+2. Inspect the source code. You can see that the color value is validated and added to an array.
+
+3. The application serializes the array, encodes it using **Base64**, and then encrypts the value using **XOR** before storing it in the cookie.
+
+4. The array contains the following default values:
+
+   ```php
+   "showpassword"=>"no",
+   "bgcolor"=>"#ffffff"
+   ```
+
+   If we can modify the cookie so that `showpassword` is changed to `yes`, the application will reveal the password for the next level.
+
+5. XOR encryption has an important property: if we know both the **plaintext** and the corresponding **ciphertext**, we can recover the XOR key.
+
+   ```text
+   Plaintext XOR Key = Ciphertext
+
+   Therefore:
+
+   Plaintext XOR Ciphertext = Key
+   ```
+
+6. Use **CyberChef** to recover the XOR key:
+
+   * Enter the cookie value as the input.
+
+   * Use **From Base64** to decode the cookie.
+
+   * Use the known plaintext:
+
+     ```json
+     {"showpassword":"no","bgcolor":"#ffffff"}
+     ```
+
+   * Apply the XOR operation using the known plaintext.
+
+   * Set the character encoding to **UTF-8**.
+
+   * The resulting output reveals the XOR key.
+
+7. Use the recovered key to encrypt the modified plaintext:
+
+   ```json
+   {"showpassword":"yes","bgcolor":"#ffffff"}
+   ```
+
+   In CyberChef:
+
+   * Enter the modified plaintext.
+   * Apply XOR using the recovered key.
+   * Convert the resulting ciphertext to Base64.
+   * Copy the final Base64 value.
+
+8. Replace the existing cookie value with the newly generated value, then click the **Set Color** button on the webpage.
+
+9. The application should now recognize `showpassword` as `yes` and display the password for the next level.
+
+## Key Learning and Mitigation
+
+The key learning is that using XOR encryption with a predictable or recoverable key can be vulnerable. Avoid using custom XOR encryption to protect sensitive data. Use standard and secure encryption methods instead.
+
+## Level 12 Credentials
+
+* **Username:** `natas12`
+* **Password:** `EAGkE8uzFTxeoTT2mMst9Xy7PX6guEng`
+
+
 
 
 
