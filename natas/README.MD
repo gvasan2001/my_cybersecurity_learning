@@ -507,6 +507,35 @@ The command output contains the password for **Natas Level 13**.
 * **Password:** `A0xXu2x9FW8rb8OSQ4ei6n5VBbLUz8h8`
 
 
+# Natas Level 14 → Level 15
+
+## Description
+This level features a classic SQL injection vulnerability within the login functionality.
+
+## Steps to Solve
+1. **Access the webpage:** Open the challenge link. You will see a login form along with an option to view the source code.
+2. **Examine the source code:** Review the backend script to see that user input is directly concatenated into the SQL statement without sanitization, rendering it vulnerable to SQL injection.
+3. **Confirm the vulnerability:** Entering a single quote (`'`) or double quote (`"`) breaks the query structure and triggers a database error. Submitting balanced quotes removes the error, confirming the injection point.
+4. **Inject the payload:** Enter a classic SQL injection bypass string into the username field (leaving the password blank):
+   ```sql
+   " or 1=1 -- 
+   ```
+5. **Retrieve the flag:** The query evaluates to true, bypasses the authentication check, and displays the password for the next level.
+
+## Key Learnings and Mitigation
+* **Sanitize Inputs:** Never trust user input. Always sanitize, validate, and filter inputs before processing them.
+* **Use Prepared Statements:** The best defense against SQL injection is using parameterized queries (Prepared Statements), which separate user data from the SQL command logic.
+
+## Level 15 Credentials
+* **Username:** `natas15`
+* **Password:** `GB6USCJYJjwLyYhZUNkE1NwDueiTow6g`
+
+
+
+
+
+
+
 
 
 
